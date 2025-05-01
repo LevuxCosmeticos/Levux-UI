@@ -1,0 +1,66 @@
+@import '../../assets/colors/colors.css';
+
+.box {
+    width: 100%;
+    height: 100%;
+    background-color: var(--gray);
+}
+
+.icon {
+    color: white;
+    margin-right: 1vw;
+}
+
+.itemHeader {
+    color: white;
+    font-size: 2.5rem;
+    margin-right: 1vw;
+}
+
+.item {
+    color: white;
+    font-size: 2rem;
+    margin-right: 1vw;
+}
+
+.listIcon {
+    display: 'flex';
+    align-items: center;
+}
+
+.centeredItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.divider {
+    background-color: var(--light-gray);
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    width: 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer; 
+    color: white;
+}
+
+.openIcon {
+    color: white;
+    cursor: pointer;
+}
