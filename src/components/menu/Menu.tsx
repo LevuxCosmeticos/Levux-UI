@@ -1,5 +1,5 @@
 import styles from './Menu.module.css';
-import { Box, Drawer, ListItemButton, ListItem, ListItemIcon } from '@mui/material';
+import { Box, Drawer } from '@mui/material';
 import CustomerOptions from './CustomerOptions';
 import logo from '../../assets/images/logo.png';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
