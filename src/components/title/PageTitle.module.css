@@ -1,0 +1,31 @@
+.title {
+    font-size: 2.5vw;
+    margin-bottom: 1vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px white solid;
+    width: fit-content;
+    margin-left: 3vw;
+    margin-bottom: 5vh;
+}
+
+@media (max-width: 500px) {
+    .title {
+        font-size: 4vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    .title {
+        font-size: 2vw;
+    }
+}
+
+@media (min-width: 1440px) {
+    .title {
+        font-size: 1.5vw;
+    }
+}
