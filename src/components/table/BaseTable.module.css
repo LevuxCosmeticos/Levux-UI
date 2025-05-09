@@ -1,0 +1,54 @@
+@import '../../assets/colors/colors.css';
+
+.headerCell {
+  color: white !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  font-size: 1.2vw !important;
+  background-color: var(--gray) !important;
+}
+
+.sticky {
+    background-color: var(--gray);
+}
+
+.bodyCell {
+  color: white !important;
+  text-align: center !important;
+  font-size: 1vw !important;
+  background-color: var(--gray) !important;
+}
+
+.tableContainer {
+  height: 100%;
+}
+
+@media (max-width: 500px) {
+    .headerCell {
+        font-size: 2.5vw !important;
+    }
+
+    .bodyCell {
+        font-size: 2vw !important;
+    }
+}
+
+@media (min-width: 760px) {
+    .headerCell {
+        font-size: 1.5vw !important;
+    }
+
+    .bodyCell {
+        font-size: 1.2vw !important;
+    }
+}
+
+@media (min-width: 1441px) {
+    .headerCell {
+        font-size: 1vw !important;
+    }
+
+    .bodyCell {
+        font-size: 0.8vw !important;
+    }
+}
