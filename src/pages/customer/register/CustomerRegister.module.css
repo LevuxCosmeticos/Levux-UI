@@ -1,0 +1,97 @@
+@import '../../../assets/colors/colors.css';
+
+.modal {
+    background-color: var(--light-gray);
+    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0vh 0vh 2vh 0vh rgba(0,0,0,0.75);
+}
+
+.text {
+    margin-bottom: 1vw !important;
+    width: 12vw !important;
+    margin-left: 2vw !important;
+    margin-right: 2vw !important;
+}
+
+.header {
+    font-size: 1vw;
+    margin-bottom: 1.5vw;
+}
+
+.button {
+    margin-bottom: 2vw;
+}
+
+@media (max-width: 2000px) {
+    .text {
+        margin-bottom: 1vw !important;
+        width: 18vw !important;
+        margin-left: 2vw !important;
+        margin-right: 2vw !important;
+    }
+
+    .header {
+        font-size: 1.2vw;
+        margin-bottom: 1.5vw;
+    }
+}
+
+@media (max-width: 1500px) {
+    .text {
+        margin-bottom: 1.5vw !important;
+        width: 20vw !important;
+        margin-left: 3vw !important;
+        margin-right: 3vw !important;
+    }
+
+    .header {
+        font-size: 1.5vw;
+        margin-bottom: 2vw;
+    }
+}
+
+@media (max-width: 1500px) {
+    .text {
+        margin-bottom: 2vw !important;
+        width: 30vw !important;
+        margin-left: 3vw !important;
+        margin-right: 3vw !important;
+    }
+
+    .header {
+        font-size: 2vw;
+        margin-bottom: 3.5vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .text {
+        margin-bottom: 3vw !important;
+        width: 55vw !important;
+        margin-left: 5vw !important;
+        margin-right: 5vw !important;
+    }
+
+    .header {
+        font-size: 3.5vw;
+        margin-bottom: 5vw;
+    }
+}
+
+@media (max-width: 350px) {
+    .text {
+        margin-bottom: 5vw !important;
+        width: 75vw !important;
+        margin-left: 5vw !important;
+        margin-right: 5vw !important;
+    }
+
+    .header {
+        font-size: 5.5vw;
+        margin-bottom: 8vw;
+    }
+}
