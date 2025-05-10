@@ -40,6 +40,7 @@ const BaseTextField: React.FC<BaseTextFieldProps> = ({
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <TextField
+                autoComplete='off'
                 label={label}
                 variant={variant}
                 required={required}
