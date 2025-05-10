@@ -4,8 +4,12 @@ import BaseTable from '../../components/table/BaseTable';
 import BaseButton from '../../components/button/BaseButton';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import colors from '../../assets/colors/colors';
+import { useState } from 'react';
+import CustomerRegister from './register/CustomerRegister';
 
 const Customer: React.FC = () => {
+
+    const [openModal, setOpenModal] = useState(false);
 
     const tableHeaders = [
         'Nome', 'CNPJ'
@@ -54,11 +58,16 @@ const Customer: React.FC = () => {
                     icon={AddBusinessIcon}
                     variant='contained'
                     backGroundColor={colors.gray}
-                    fontSize='0.8vw'
+                    fontSize='80%'
                     border='1px solid white'
                     borderRadius='10vw'
+                    onClick={() => setOpenModal(true)}
                 />
             </div>
+            <CustomerRegister 
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+            />
         </div>
     )
 }
