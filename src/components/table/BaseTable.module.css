@@ -43,7 +43,18 @@
     }
 }
 
-@media (min-width: 1441px) {
+@media (min-width: 1300px) {
+    .headerCell {
+        font-size: 1.2vw !important;
+    }
+
+    .bodyCell {
+        font-size: 1vw !important;
+    }
+
+}
+
+@media (min-width: 1440px) {
     .headerCell {
         font-size: 1vw !important;
     }
@@ -51,4 +62,5 @@
     .bodyCell {
         font-size: 0.8vw !important;
     }
+
 }
