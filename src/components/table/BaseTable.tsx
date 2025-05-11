@@ -1,8 +1,9 @@
 import styles from './BaseTable.module.css';
-import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper, CircularProgress, Box, colors } from "@mui/material"
+import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper, CircularProgress, Box } from "@mui/material"
+import TableHeader from '../../dto/table/TableHeader';
 
 interface BaseTableProps<T> {
-    headers: string[]
+    headers: TableHeader[]
     rows: T[]
     rowKey: keyof T
     width: string
@@ -30,8 +31,8 @@ const BaseTable = <T extends Record<string, any>>({
                     <TableHead>
                         <TableRow>
                             {headers.map((header => (
-                                <TableCell key={header} className={styles.headerCell}>
-                                    {header}
+                                <TableCell key={header.key} className={styles.headerCell}>
+                                    {header.label}
                                 </TableCell>
                             )))}
                         </TableRow>
@@ -54,8 +55,8 @@ const BaseTable = <T extends Record<string, any>>({
                             rows.map((row) => (
                                 <TableRow key={row[rowKey] as React.Key}>
                                     {headers.map((header) => (
-                                        <TableCell key={header} className={styles.bodyCell}>
-                                            {row[header]}
+                                        <TableCell key={header.key} className={styles.bodyCell}>
+                                            {row[header.key]}
                                         </TableCell>
                                     ))}
                                 </TableRow>

@@ -4,39 +4,35 @@ import BaseTable from '../../components/table/BaseTable';
 import BaseButton from '../../components/button/BaseButton';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import colors from '../../assets/colors/colors';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CustomerRegister from './register/CustomerRegister';
+import { CustomerResponse } from '../../dto/customer/CustomerResponse';
+import CustomerService from '../../service/customer/CustomerService';
+import TableHeader from '../../dto/table/TableHeader';
+import { useToaster } from "../../components/toaster/ToasterProvider";
 
 const Customer: React.FC = () => {
 
+    const toaster = useToaster();
+    const [loading, setLoading] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const [customers, setCustomers] = useState<CustomerResponse[]>([]);
 
-    const tableHeaders = [
-        'Nome', 'CNPJ'
+    const tableHeaders: TableHeader[] = [
+        { label: "Nome", key: "name" },
+        { label: "CNPJ", key: "taxId" }
     ]
 
-    const tableRows = [
-        { Nome: 'EMPRESA 1', CNPJ: '00.000.000/0001-01' },
-        { Nome: 'EMPRESA 2', CNPJ: '00.000.000/0001-02' },
-        { Nome: 'EMPRESA 3', CNPJ: '00.000.000/0001-03' },
-        { Nome: 'EMPRESA 4', CNPJ: '00.000.000/0001-04' },
-        { Nome: 'EMPRESA 5', CNPJ: '00.000.000/0001-05' },
-        { Nome: 'EMPRESA 6', CNPJ: '00.000.000/0001-06' },
-        { Nome: 'EMPRESA 7', CNPJ: '00.000.000/0001-07' },
-        { Nome: 'EMPRESA 8', CNPJ: '00.000.000/0001-08' },
-        { Nome: 'EMPRESA 9', CNPJ: '00.000.000/0001-09' },
-        { Nome: 'EMPRESA 10', CNPJ: '00.000.000/0001-10' },
-        { Nome: 'EMPRESA 1', CNPJ: '00.000.000/0001-01' },
-        { Nome: 'EMPRESA 2', CNPJ: '00.000.000/0001-02' },
-        { Nome: 'EMPRESA 3', CNPJ: '00.000.000/0001-03' },
-        { Nome: 'EMPRESA 4', CNPJ: '00.000.000/0001-04' },
-        { Nome: 'EMPRESA 5', CNPJ: '00.000.000/0001-05' },
-        { Nome: 'EMPRESA 6', CNPJ: '00.000.000/0001-06' },
-        { Nome: 'EMPRESA 7', CNPJ: '00.000.000/0001-07' },
-        { Nome: 'EMPRESA 8', CNPJ: '00.000.000/0001-08' },
-        { Nome: 'EMPRESA 9', CNPJ: '00.000.000/0001-09' },
-        { Nome: 'EMPRESA 10', CNPJ: '00.000.000/0001-10' }
-    ]
+    useEffect(() => {
+        const fetchCustomers = async () => {
+            setLoading(true);
+            const data = await CustomerService.getCustomerList(toaster);
+            setCustomers(data);
+            setLoading(false);
+        };
+
+        fetchCustomers();
+    }, []);
 
     return (
         <div className={styles.page}>
@@ -44,11 +40,12 @@ const Customer: React.FC = () => {
             <div className={styles.table}>
                 <BaseTable
                     headers={tableHeaders}
-                    rows={tableRows}
-                    rowKey='CNPJ'
+                    rows={customers}
+                    rowKey='taxId'
                     width='70vw'
                     height='70vh'
                     overflow='auto'
+                    loading={loading}
                 />
             </div>
             <div className={styles.button}>
@@ -64,7 +61,7 @@ const Customer: React.FC = () => {
                     onClick={() => setOpenModal(true)}
                 />
             </div>
-            <CustomerRegister 
+            <CustomerRegister
                 openModal={openModal}
                 setOpenModal={setOpenModal}
             />
