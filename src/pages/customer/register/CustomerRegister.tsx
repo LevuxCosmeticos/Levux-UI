@@ -81,6 +81,7 @@ const CustomerRegister: React.FC<CustomerRegisterProps> = ({ openModal, setOpenM
                         border='1px solid white'
                         borderRadius='10vw'
                         fontSize='80%'
+                        spinnerSize={25}
                         className={styles.button}
                     />
                 </form>
