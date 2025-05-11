@@ -1,5 +1,5 @@
 import styles from './BaseTable.module.css';
-import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper } from "@mui/material"
+import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper, CircularProgress, Box, colors } from "@mui/material"
 
 interface BaseTableProps<T> {
     headers: string[]
@@ -8,6 +8,7 @@ interface BaseTableProps<T> {
     width: string
     height: string
     overflow: string
+    loading?: boolean
 }
 
 const BaseTable = <T extends Record<string, any>>({
@@ -16,7 +17,8 @@ const BaseTable = <T extends Record<string, any>>({
     rowKey,
     width,
     height,
-    overflow
+    overflow,
+    loading = false
 }: BaseTableProps<T>) => {
 
     return (
@@ -35,15 +37,30 @@ const BaseTable = <T extends Record<string, any>>({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row[rowKey] as React.Key}>
-                                {headers.map((header) => (
-                                    <TableCell key={header} className={styles.bodyCell}>
-                                        {row[header]}
-                                    </TableCell>
-                                ))}
+                        {loading ? (
+                            <TableRow>
+                                <TableCell colSpan={headers.length}>
+                                    <Box display="flex"
+                                        justifyContent="center"
+                                        alignItems="center" 
+                                        height="100px"
+                                        sx={{ color: 'white' }}
+                                    >
+                                        <CircularProgress color='inherit'/>
+                                    </Box>
+                                </TableCell>
                             </TableRow>
-                        ))}
+                        ) : (
+                            rows.map((row) => (
+                                <TableRow key={row[rowKey] as React.Key}>
+                                    {headers.map((header) => (
+                                        <TableCell key={header} className={styles.bodyCell}>
+                                            {row[header]}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
