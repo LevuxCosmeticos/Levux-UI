@@ -64,7 +64,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
                             <CircularProgress
                                 size={spinnerSize}
                                 sx={{
-                                    color: color
+                                    color: color,
                                 }} />
                         </Box>
                         :
