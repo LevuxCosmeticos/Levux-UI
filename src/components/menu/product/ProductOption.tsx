@@ -1,22 +1,21 @@
 import styles from '../Menu.module.css';
 import { Divider, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Store } from '@mui/icons-material';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
-interface CustomerOptionProps {
+interface ProductOptionProps {
     onClick: () => void
 }
 
-const CustomerOption: React.FC<CustomerOptionProps> = ({
+const ProductOption: React.FC<ProductOptionProps> = ({
     onClick
 }) => {
 
     return (
         <List disablePadding>
-            <Divider className={styles.divider} />
             <ListItemButton onClick={onClick}>
                 <ListItemIcon className={styles.listIcon}>
-                    <Store className={styles.icon} fontSize='large' />
-                    <ListItemText primary="Clientes"
+                    <LocalOfferIcon className={styles.icon} fontSize='large' />
+                    <ListItemText primary="Produtos"
                         className={styles.itemHeader}
                         slotProps={{
                             primary: {
@@ -30,4 +29,4 @@ const CustomerOption: React.FC<CustomerOptionProps> = ({
     )
 }
 
-export default CustomerOption;
+export default ProductOption;
