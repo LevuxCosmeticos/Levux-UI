@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import TableHeader from '../../dto/table/TableHeader';
 import { useToaster } from "../../components/toaster/ToasterProvider";
 import { ProductResponse } from '../../dto/product/ProductResponse';
+import ProductRegister from './register/ProductRegister';
 
 const Product: React.FC = () => {
 
@@ -19,7 +20,7 @@ const Product: React.FC = () => {
     const tableHeaders: TableHeader[] = [
         { label: "Nome", key: "name" },
         { label: "Código", key: "code" },
-        { label: "Valor", key: "value"}
+        { label: "Valor", key: "value" }
     ]
 
     useEffect(() => {
@@ -56,6 +57,10 @@ const Product: React.FC = () => {
                     border='1px solid white'
                     borderRadius='10vw'
                     onClick={() => setOpenModal(true)}
+                />
+                <ProductRegister
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
                 />
             </div>
         </div>
