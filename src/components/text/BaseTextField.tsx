@@ -22,13 +22,14 @@ interface BaseTextFieldProps {
     helperText?: string | boolean;
     value?: string | number;
     maxLength?: number;
+    initialAdornment?: string
 }
 
 const BaseTextField: React.FC<BaseTextFieldProps> = ({
     label, color = 'white', variant = 'outlined',
     required, type = 'text', className, onChange,
     fontSize, fieldName, onBlur, error = false,
-    helperText, value, maxLength
+    helperText, value, maxLength, initialAdornment
 }) => {
 
     const [showPassword, setShowPassword] = useState(false);
@@ -82,6 +83,9 @@ const BaseTextField: React.FC<BaseTextFieldProps> = ({
                         },
                     },
                     input: {
+                        startAdornment: initialAdornment ?
+                            <InputAdornment position='start'><p style={{ color: error ? 'red' : color }}>{initialAdornment}</p></InputAdornment>
+                            : null,
                         endAdornment: (
                             <InputAdornment position="end">
                                 {type === 'password' &&
