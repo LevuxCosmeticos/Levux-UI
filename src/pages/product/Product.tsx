@@ -53,7 +53,7 @@ const Product: React.FC = () => {
                     icon={AddShoppingCartIcon}
                     variant='contained'
                     backGroundColor={colors.gray}
-                    fontSize='80%'
+                    fontSize='60%'
                     border='1px solid white'
                     borderRadius='10vw'
                     onClick={() => setOpenModal(true)}
