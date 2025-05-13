@@ -64,6 +64,7 @@ const Customer: React.FC = () => {
             <CustomerRegister
                 openModal={openModal}
                 setOpenModal={setOpenModal}
+                fetchCustomers={fetchCustomers}
             />
         </div>
     )
