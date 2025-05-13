@@ -21,7 +21,7 @@ class ProductService {
         return floatValue.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-        });
+        }).replace(',', '');
     };
 
     async getProductList(

@@ -23,14 +23,14 @@ const Customer: React.FC = () => {
         { label: "CNPJ", key: "taxId" }
     ]
 
-    useEffect(() => {
-        const fetchCustomers = async () => {
-            setLoading(true);
-            const data = await CustomerService.getCustomerList(toaster);
-            setCustomers(data);
-            setLoading(false);
-        };
+    const fetchCustomers = async () => {
+        setLoading(true);
+        const data = await CustomerService.getCustomerList(toaster);
+        setCustomers(data);
+        setLoading(false);
+    };
 
+    useEffect(() => {
         fetchCustomers();
     }, []);
 

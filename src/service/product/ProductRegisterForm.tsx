@@ -18,7 +18,8 @@ const ProductRegisterFormValidation = Yup.object({
 
 export const useProductRegisterFormik = (
     setLoading: (loading: boolean) => void,
-    setOpenModal: (open: boolean) => void
+    setOpenModal: (open: boolean) => void,
+    fetchProducts: () => void
 ) => {
 
     const toaster = useToaster();
@@ -33,7 +34,7 @@ export const useProductRegisterFormik = (
         validationSchema: ProductRegisterFormValidation,
 
         onSubmit: (values: ProductRegisterFormData, formikHelpers) => {
-            handleFormSubmit(values, setLoading, setOpenModal, formikHelpers, toaster);
+            handleFormSubmit(values, setLoading, setOpenModal, formikHelpers, toaster, fetchProducts);
         }
     })
 }
@@ -43,7 +44,8 @@ const handleFormSubmit = async (
     setLoading: (loading: boolean) => void,
     setOpenModal: (open: boolean) => void,
     formikHelpers: any,
-    toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void
+    toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void,
+    fetchProducts: () => void
 ) => {
     setLoading(true);
     try {
@@ -51,6 +53,7 @@ const handleFormSubmit = async (
         toaster('Produto registrado com sucesso!', 5000, 'success', 'filled');
         setOpenModal(false);
         formikHelpers.resetForm();
+        fetchProducts();
     } catch (error) {
         if (error instanceof AxiosError) {
             if (error.message.includes('409')) {
