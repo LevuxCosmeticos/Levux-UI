@@ -9,6 +9,7 @@ import TableHeader from '../../dto/table/TableHeader';
 import { useToaster } from "../../components/toaster/ToasterProvider";
 import { ProductResponse } from '../../dto/product/ProductResponse';
 import ProductRegister from './register/ProductRegister';
+import productService from '../../service/product/ProductService';
 
 const Product: React.FC = () => {
 
@@ -26,7 +27,9 @@ const Product: React.FC = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
+            const data = await productService.getProductList(toaster);
             setLoading(false);
+            setProducts(data);
         };
 
         fetchProducts();
