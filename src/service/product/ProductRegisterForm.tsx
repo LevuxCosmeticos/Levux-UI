@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useToaster, Severity, Variant } from '../../components/toaster/ToasterProvider';
 import { AxiosError } from 'axios';
 import { ProductRegisterFormData } from '../../dto/product/ProductRegisterFormData';
+import productService from './ProductService';
 
 const ProductRegisterFormValidation = Yup.object({
     name: Yup.string()
@@ -25,8 +26,8 @@ export const useProductRegisterFormik = (
     return useFormik<ProductRegisterFormData>({
         initialValues: {
             name: '',
-            code: undefined,
-            value: undefined
+            code: '',
+            value: ''
         },
 
         validationSchema: ProductRegisterFormValidation,
@@ -46,7 +47,7 @@ const handleFormSubmit = async (
 ) => {
     setLoading(true);
     try {
-        //await customerService.registerCustomer(values);
+        await productService.registerProduct(values);
         toaster('Produto registrado com sucesso!', 5000, 'success', 'filled');
         setOpenModal(false);
         formikHelpers.resetForm();
