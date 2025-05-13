@@ -24,14 +24,14 @@ const Product: React.FC = () => {
         { label: "Valor", key: "value" }
     ]
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true);
-            const data = await productService.getProductList(toaster);
-            setLoading(false);
-            setProducts(data);
-        };
+    const fetchProducts = async () => {
+        setLoading(true);
+        const data = await productService.getProductList(toaster);
+        setLoading(false);
+        setProducts(data);
+    };
 
+    useEffect(() => {
         fetchProducts();
     }, []);
 
@@ -64,6 +64,7 @@ const Product: React.FC = () => {
                 <ProductRegister
                     openModal={openModal}
                     setOpenModal={setOpenModal}
+                    fetchProducts={fetchProducts}
                 />
             </div>
         </div>

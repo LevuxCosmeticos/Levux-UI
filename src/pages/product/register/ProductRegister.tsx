@@ -10,13 +10,14 @@ import colors from '../../../assets/colors/colors';
 interface ProductRegisterProps {
     openModal: boolean;
     setOpenModal: (open: boolean) => void;
+    fetchProducts: () => void;
 }
 
-const ProductRegister: React.FC<ProductRegisterProps> = ({ openModal, setOpenModal }) => {
+const ProductRegister: React.FC<ProductRegisterProps> = ({ openModal, setOpenModal, fetchProducts }) => {
 
     const [loading, setLoading] = useState(false);
 
-    const registerFormik = useProductRegisterFormik(setLoading, setOpenModal);
+    const registerFormik = useProductRegisterFormik(setLoading, setOpenModal, fetchProducts);
 
     const handleCloseModal = () => {
         setOpenModal(false);
