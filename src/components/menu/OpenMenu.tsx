@@ -5,6 +5,7 @@ import logo from '../../assets/images/logo.png';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { Pages, PagesEnum } from '../../enums/PagesEnum';
 import ProductOption from './product/ProductOption';
+import CycleOption from './cycle/CycleOption';
 
 interface OpenMenuProps {
     setOpen: (open: boolean) => void
@@ -28,6 +29,7 @@ const OpenMenu: React.FC<OpenMenuProps> = ({
                     onClick={() => setOpen(false)}
                 />
             </div>
+            <CycleOption onClick={() => navigate(Pages.CYCLES)} />
             <CustomerOption onClick={() => navigate(Pages.CUSTOMER)} />
             <ProductOption onClick={() => navigate(Pages.PRODUCT)} />
         </Box>
