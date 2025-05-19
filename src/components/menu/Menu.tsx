@@ -11,7 +11,7 @@ const Menu: React.FC<MenuProps> = ({
     changePage
 }) => {
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     const navigate = (newPage: PagesEnum) => {
         setOpen(false);
