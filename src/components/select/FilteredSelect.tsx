@@ -63,22 +63,23 @@ const FilteredSelect = <T extends Record<string, any>>({
             onInputChange={handleTextChange}
             filterOptions={filterOptions}
             onChange={(_, value) => {
-                if (value) {
-                    selectChange?.(value);
-                }
+                selectChange?.(value);
             }}
-            renderOption={(props, option) => (
-                <li {...props}>
-                    <div>
-                        <div>{getOptionLabel(option)}</div>
-                        {getOptionSubLabel && (
-                            <div style={{ fontSize: '0.8em', opacity: 0.7 }}>
-                                {getOptionSubLabel(option)}
-                            </div>
-                        )}
-                    </div>
-                </li>
-            )}
+            renderOption={(props, option) => {
+                const { key, ...rest } = props;
+                return (
+                    <li key={key} {...rest}>
+                        <div>
+                            <div>{getOptionLabel(option)}</div>
+                            {getOptionSubLabel && (
+                                <div style={{ fontSize: '0.8em', opacity: 0.7 }}>
+                                    {getOptionSubLabel(option)}
+                                </div>
+                            )}
+                        </div>
+                    </li>
+                );
+            }}
             renderInput={(params) =>
                 <TextField
                     {...params}

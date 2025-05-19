@@ -1,0 +1,29 @@
+.companySelect {
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 25vw;
+}
+
+@media (max-width: 1024px) {
+    .companySelect {
+        width: 30vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .companySelect {
+        width: 35vw;
+    }
+}
+
+@media (max-width: 425px) {
+    .companySelect {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 320px) {
+    .companySelect {
+        width: 60vw;
+    }
+}
