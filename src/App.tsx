@@ -6,6 +6,7 @@ import Customer from './pages/customer/Customer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToasterProvider from './components/toaster/ToasterProvider';
 import Product from './pages/product/Product';
+import Cycle from './pages/cycle/Cycle';
 
 function App() {
 
@@ -29,8 +30,13 @@ function App() {
             page === Pages.CUSTOMER &&
             <Customer />
           }
-          {page === Pages.PRODUCT &&
+          {
+            page === Pages.PRODUCT &&
             <Product />
+          }
+          {
+            page === Pages.CYCLES &&
+            <Cycle />
           }
         </div>
       </div>
