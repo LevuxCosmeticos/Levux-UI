@@ -1,29 +1,62 @@
-.companySelect {
-    margin-left: 5%;
+.filterForm {
+    display: flex;
     margin-top: 5%;
+    margin-left: 5%;
+}
+
+.customerSelect {
+    margin-right: 5%;
+    margin-bottom: 5%;
     width: 25vw;
 }
 
+.cycleSelect {
+    margin-right: 5%;
+    margin-bottom: 5%;
+    width: 10vw;
+}
+
+@media (max-width: 1440px) {
+    .customerSelect {
+        width: 40vw;
+    }
+    .cycleSelect {
+        width: 15vw;
+    }
+}
+
 @media (max-width: 1024px) {
-    .companySelect {
-        width: 30vw;
+    .customerSelect {
+        width: 40vw;
+    }
+    .cycleSelect {
+        width: 20vw;
     }
 }
 
 @media (max-width: 768px) {
-    .companySelect {
-        width: 35vw;
+    .customerSelect {
+        width: 40vw;
+    }
+    .cycleSelect {
+        width: 25vw;
     }
 }
 
 @media (max-width: 425px) {
-    .companySelect {
+    .filterForm {
+        flex-direction: column;
+    }
+    .customerSelect {
+        width: 70vw;
+    }
+    .cycleSelect {
         width: 50vw;
     }
 }
 
 @media (max-width: 320px) {
-    .companySelect {
-        width: 60vw;
+    .customerSelect {
+        width: 70vw;
     }
 }

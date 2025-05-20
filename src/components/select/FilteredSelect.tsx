@@ -14,6 +14,8 @@ interface FilteredSelectionProps<T> {
     fontSize?: string;
     className?: string;
     getOptionSubLabel?: (option: T) => string;
+    label: string;
+    value?: T | null;
 }
 
 const FilteredSelect = <T extends Record<string, any>>({
@@ -26,7 +28,9 @@ const FilteredSelect = <T extends Record<string, any>>({
     loading = false,
     fontSize,
     className,
-    getOptionSubLabel
+    getOptionSubLabel,
+    label,
+    value
 }: FilteredSelectionProps<T>) => {
 
     const debounceTimeout = useRef<number | null>(null);
@@ -65,6 +69,7 @@ const FilteredSelect = <T extends Record<string, any>>({
             onChange={(_, value) => {
                 selectChange?.(value);
             }}
+            value={value}
             renderOption={(props, option) => {
                 const { key, ...rest } = props;
                 return (
@@ -83,7 +88,7 @@ const FilteredSelect = <T extends Record<string, any>>({
             renderInput={(params) =>
                 <TextField
                     {...params}
-                    label="Empresa"
+                    label={label}
                     sx={{
                         input: {
                             color: color,

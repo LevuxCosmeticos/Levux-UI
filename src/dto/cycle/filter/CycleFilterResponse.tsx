@@ -1,6 +1,4 @@
 export interface CycleFilterResponse {
-    customerId: number;
-    customerName: string;
-    actualCycle: number;
-    taxId: string;
+    cycle: number;
+    label: string;
 }

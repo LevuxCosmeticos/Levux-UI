@@ -1,7 +1,7 @@
 import axios from "axios";
 import LocalEnvironment from "../../config/LocalEnvironment";
 import { Severity, Variant } from "../../components/toaster/ToasterProvider";
-import { CycleFilterResponse } from "../../dto/cycle/filter/CycleFilterResponse";
+import { CycleFilterResponse } from "../../dto/cycle/filter/CycleCustomerFilterResponse";
 
 class CycleService {
 
