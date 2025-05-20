@@ -53,13 +53,20 @@ export const tableWithData = (
     const isActiveCycle = data?.cycle === activeCycle;
 
     const editableFields = (
-        value: number, productId: number, field: keyof CycleBalanceResponse
+        value: number, 
+        productId: number, 
+        field: keyof CycleBalanceResponse,
+        max?: number
     ) => {
         return isActiveCycle ?
             <TextField
                 type="number"
                 value={value}
                 onChange={(e) => onBalanceFieldChange(productId, field, Number(e.target.value))}
+                inputProps={{
+                    min: 0,
+                    max: max
+                }}
             /> :
             value
     }
@@ -68,7 +75,7 @@ export const tableWithData = (
         <TableRow key={row.productId}>
             <TableCell>{row.productName}</TableCell>
             <TableCell>{row.isNew ? editableFields(row.initialBalance, row.productId, 'initialBalance') : row.initialBalance}</TableCell>
-            <TableCell>{editableFields(row.lift, row.productId, 'lift')}</TableCell>
+            <TableCell>{editableFields(row.lift, row.productId, 'lift', row.initialBalance)}</TableCell>
             <TableCell>{row.sold}</TableCell>
             <TableCell>{editableFields(row.replacement, row.productId, 'replacement')}</TableCell>
             <TableCell>{row.finalBalance}</TableCell>
