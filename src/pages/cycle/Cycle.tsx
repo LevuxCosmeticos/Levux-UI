@@ -86,7 +86,7 @@ const Cycle: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className={styles.cyclePage}>
             <form className={styles.filterForm} >
                 <FilteredSelect
                     options={customerFilterOptions}

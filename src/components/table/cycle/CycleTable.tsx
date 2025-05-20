@@ -1,3 +1,4 @@
+import styles from "./CycleTable.module.css";
 import { CycleResponse } from "../../../dto/cycle/filter/CycleResponse";
 import { CycleBalanceResponse } from "../../../dto/cycle/filter/CycleBalanceResponse";
 import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper } from "@mui/material"
@@ -32,28 +33,29 @@ const CycleTable = ({
     }
 
     return (
-        <Paper>
-            {
-                data &&
-                <h1>{data.customerName} - {formatUtils.formatCNPJ(data.taxId)}</h1>
+        <div className={styles.tableWrapper}>
+            {data &&
+                <h1 className={styles.title}>{data.customerName} - {formatUtils.formatCNPJ(data.taxId)}</h1>
             }
-            <TableContainer>
-                <Table stickyHeader>
-                    <TableHead>
-                        <TableRow>
-                            {headers.map((header) => (
-                                <TableCell key={header.key} >
-                                    {header.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {tableBody}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
+            <Paper className={styles.paper}>
+                <TableContainer className={styles.tableContainer}>
+                    <Table stickyHeader className={styles.sticky}>
+                        <TableHead>
+                            <TableRow>
+                                {headers.map((header) => (
+                                    <TableCell key={header.key} className={styles.headerCell}>
+                                        {header.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {tableBody}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+        </div>
     )
 
 }
