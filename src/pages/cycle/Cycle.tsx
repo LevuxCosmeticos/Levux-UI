@@ -8,6 +8,7 @@ import { CycleFilterResponse } from "../../dto/cycle/filter/CycleFilterResponse"
 import SearchIcon from '@mui/icons-material/Search';
 import cycleLogic from "./CycleLogic";
 import { CycleResponse } from "../../dto/cycle/filter/CycleResponse";
+import { CycleBalanceResponse } from "../../dto/cycle/filter/CycleBalanceResponse";
 import CycleTable from "../../components/table/cycle/CycleTable";
 
 const Cycle: React.FC = () => {
@@ -70,6 +71,20 @@ const Cycle: React.FC = () => {
         fetchFilters('');
     }, []);
 
+    const handleBalanceFieldChange = <K extends keyof CycleBalanceResponse>(
+        productId: number,
+        field: K,
+        newValue: CycleBalanceResponse[K]
+    ) => {
+        cycleLogic.updateBalanceField(
+            cycleResponse,
+            setCycleResponse,
+            productId,
+            field,
+            newValue
+        );
+    };
+
     return (
         <div>
             <form className={styles.filterForm} >
@@ -110,6 +125,8 @@ const Cycle: React.FC = () => {
             <CycleTable
                 data={cycleResponse}
                 loading={loadingTable}
+                activeCycle={selectedCustomer ? selectedCustomer.actualCycle : 0}
+                onBalanceFieldChange={handleBalanceFieldChange}
             />
         </div>
     )

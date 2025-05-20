@@ -1,4 +1,5 @@
 import { CycleResponse } from "../../../dto/cycle/filter/CycleResponse";
+import { CycleBalanceResponse } from "../../../dto/cycle/filter/CycleBalanceResponse";
 import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper } from "@mui/material"
 import formatUtils from "../../../utils/format/FormatUtils";
 import { cycleTableHeader } from "./CycleTableHeader";
@@ -6,11 +7,17 @@ import { tableEmpty, tableLoading, tableWithData } from "./CycleTableBody";
 
 interface CycleTableProps {
     data: CycleResponse | null,
-    loading: boolean
+    loading: boolean,
+    activeCycle: number,
+    onBalanceFieldChange: <K extends keyof CycleBalanceResponse>(
+        productId: number,
+        field: K,
+        newValue: CycleBalanceResponse[K]
+    ) => void;
 }
 
 const CycleTable = ({
-    data, loading
+    data, loading, activeCycle, onBalanceFieldChange
 }: CycleTableProps) => {
 
     const headers = cycleTableHeader;
@@ -19,7 +26,7 @@ const CycleTable = ({
     if (loading) {
         tableBody = tableLoading();
     } else if (data) {
-        tableBody = tableWithData(data);
+        tableBody = tableWithData(data, activeCycle, onBalanceFieldChange);
     } else {
         tableBody = tableEmpty();
     }

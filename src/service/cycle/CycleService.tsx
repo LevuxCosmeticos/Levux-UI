@@ -43,6 +43,13 @@ class CycleService {
                     }
                 }
             );
+            
+            if (response.data && Array.isArray(response.data.balances)) {
+                response.data.balances = response.data.balances.map(balance => ({
+                    ...balance,
+                    isNew: balance.initialBalance === 0
+                }));
+            }
             return response.data;
         } catch {
             toaster('Ocorreu um erro, tente novamente mais tarde.', 5000, 'error', 'filled');
