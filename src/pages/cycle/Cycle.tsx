@@ -7,6 +7,8 @@ import formatUtils from "../../utils/format/FormatUtils";
 import { CycleFilterResponse } from "../../dto/cycle/filter/CycleFilterResponse";
 import SearchIcon from '@mui/icons-material/Search';
 import cycleLogic from "./CycleLogic";
+import { CycleResponse } from "../../dto/cycle/filter/CycleResponse";
+import CycleTable from "../../components/table/cycle/CycleTable";
 
 const Cycle: React.FC = () => {
 
@@ -20,6 +22,10 @@ const Cycle: React.FC = () => {
 
     const [loadingFilters, setLoadingFilters] = useState(false);
 
+    const [cycleResponse, setCycleResponse] = useState<CycleResponse | null>(null);
+
+    const [loadingTable, setLoadingTable] = useState(false);
+
     const fetchFilters = (strSearch: string) => {
         cycleLogic.fetchFilters(
             strSearch,
@@ -30,26 +36,34 @@ const Cycle: React.FC = () => {
     }
 
     const handleCustomerChange = (value: CycleCustomerFilterResponse) => {
+        setSelectedCustomer(value);
+        setSelectedCycle(null);
+        setCycleResponse(null);
         cycleLogic.handleCustomerFilterSelectChange(
             value,
-            setSelectedCycle,
             setCycleFilterOptions,
             setCustomerFilterOptions,
             setLoadingFilters,
-            toaster,
-            setSelectedCustomer
+            toaster
         );
     }
 
     const handleFilterSubmit = async () => {
+        setLoadingTable(true);
         if (cycleLogic.filterFormConcluded(selectedCycle, selectedCustomer)) {
-            const cycleInformation = await cycleLogic.fetchCycleInformation(
+            const response = await cycleLogic.fetchCycleInformation(
                 selectedCycle,
                 selectedCustomer,
                 toaster
             );
-            console.log(cycleInformation);
+            setCycleResponse(response);
         }
+        setLoadingTable(false);
+    }
+
+    const handleCycleChange = (value: CycleFilterResponse) => {
+        setSelectedCycle(value);
+        setCycleResponse(null);
     }
 
     useEffect(() => {
@@ -79,7 +93,7 @@ const Cycle: React.FC = () => {
                         className={styles.cycleSelect}
                         fontSize="100%"
                         value={selectedCycle}
-                        selectChange={(value) => { setSelectedCycle(value) }}
+                        selectChange={(value) => { handleCycleChange(value) }}
                         label='Ciclo'
                     />
                     <SearchIcon
@@ -93,6 +107,10 @@ const Cycle: React.FC = () => {
                     />
                 </div>
             </form>
+            <CycleTable
+                data={cycleResponse}
+                loading={loadingTable}
+            />
         </div>
     )
 }

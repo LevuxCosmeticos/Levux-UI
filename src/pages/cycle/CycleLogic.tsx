@@ -7,15 +7,11 @@ class CycleLogic {
 
     handleCustomerFilterSelectChange = (
         value: CycleCustomerFilterResponse,
-        setSelectedCycle: React.Dispatch<React.SetStateAction<CycleFilterResponse | null>>,
         setCycleFilterOptions: React.Dispatch<React.SetStateAction<CycleFilterResponse[]>>,
         setCustomerFilterOptions: React.Dispatch<React.SetStateAction<CycleCustomerFilterResponse[]>>,
         setLoadingFilters: React.Dispatch<React.SetStateAction<boolean>>,
         toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void,
-        setSelectedCustomer: React.Dispatch<React.SetStateAction<CycleCustomerFilterResponse | null>>
     ) => {
-        setSelectedCycle(null);
-        setSelectedCustomer(value);
         if (value == null) {
             this.fetchFilters(
                 '',
