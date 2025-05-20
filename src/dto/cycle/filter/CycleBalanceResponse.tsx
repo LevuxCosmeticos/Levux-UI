@@ -6,4 +6,5 @@ export interface CycleBalanceResponse {
     sold: number;
     replacement: number;
     finalBalance: number;
+    isNew: boolean;
 }

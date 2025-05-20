@@ -1,5 +1,7 @@
 import { CycleCustomerFilterResponse } from "../../dto/cycle/filter/CycleCustomerFilterResponse";
 import { CycleFilterResponse } from "../../dto/cycle/filter/CycleFilterResponse";
+import { CycleResponse } from "../../dto/cycle/filter/CycleResponse";
+import { CycleBalanceResponse } from "../../dto/cycle/filter/CycleBalanceResponse";
 import cycleService from "../../service/cycle/CycleService";
 import { Severity, Variant } from '../../components/toaster/ToasterProvider';
 
@@ -62,6 +64,22 @@ class CycleLogic {
             toaster
         );
         return cycleInformation;
+    }
+
+    updateBalanceField<K extends keyof CycleBalanceResponse>(
+        cycleResponse: CycleResponse | null,
+        setCycleResponse: React.Dispatch<React.SetStateAction<CycleResponse | null>>,
+        productId: number,
+        field: K,
+        newValue: CycleBalanceResponse[K]
+    ) {
+        if (!cycleResponse) return;
+
+        const updatedBalances = cycleResponse.balances.map((b) =>
+            b.productId === productId ? { ...b, [field]: newValue } : b
+        );
+
+        setCycleResponse({ ...cycleResponse, balances: updatedBalances });
     }
 }
 
