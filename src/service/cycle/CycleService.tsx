@@ -13,7 +13,7 @@ class CycleService {
         toaster: (message: string, autoHideDuration: number, severity: Severity, variant: Variant) => void
     ): Promise<CycleCustomerFilterResponse[]> {
         try {
-            const response = await axios.get(
+            const response = await axios.get<CycleCustomerFilterResponse[]>(
                 this.cycleUrl + '/filter',
                 {
                     params: {
@@ -21,12 +21,7 @@ class CycleService {
                     }
                 }
             );
-            return response.data.map((item: any) => ({
-                customerId: item.customerId,
-                customerName: item.customerName,
-                actualCycle: item.actualCycle,
-                taxId: item.taxId
-            }));
+            return response.data;
         } catch {
             toaster('Ocorreu um erro, tente novamente mais tarde.', 5000, 'error', 'filled');
             return [];
