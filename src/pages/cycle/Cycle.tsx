@@ -20,12 +20,12 @@ const Cycle: React.FC = () => {
 
     const [cycleFilterOptions, setCycleFilterOptions] = useState<CycleFilterResponse[]>([]);
     const [selectedCycle, setSelectedCycle] = useState<CycleFilterResponse | null>(null);
-
-    const [loadingFilters, setLoadingFilters] = useState(false);
-
     const [cycleResponse, setCycleResponse] = useState<CycleResponse | null>(null);
 
+    const [loadingFilters, setLoadingFilters] = useState(false);
     const [loadingTable, setLoadingTable] = useState(false);
+
+    const [updatedProductIds, setUpdatedProductIds] = useState<number[]>([]);
 
     const fetchFilters = (strSearch: string) => {
         cycleLogic.fetchFilters(
@@ -40,6 +40,7 @@ const Cycle: React.FC = () => {
         setSelectedCustomer(value);
         setSelectedCycle(null);
         setCycleResponse(null);
+        setUpdatedProductIds([]);
         cycleLogic.handleCustomerFilterSelectChange(
             value,
             setCycleFilterOptions,
@@ -51,6 +52,7 @@ const Cycle: React.FC = () => {
 
     const handleFilterSubmit = async () => {
         setLoadingTable(true);
+        setUpdatedProductIds([]);
         if (cycleLogic.filterFormConcluded(selectedCycle, selectedCustomer)) {
             const response = await cycleLogic.fetchCycleInformation(
                 selectedCycle,
@@ -65,6 +67,7 @@ const Cycle: React.FC = () => {
     const handleCycleChange = (value: CycleFilterResponse) => {
         setSelectedCycle(value);
         setCycleResponse(null);
+        setUpdatedProductIds([]);
     }
 
     useEffect(() => {
@@ -83,6 +86,12 @@ const Cycle: React.FC = () => {
             field,
             newValue
         );
+        setUpdatedProductIds((prev) => {
+            if (!prev.includes(productId)) {
+                return [...prev, productId];
+            }
+            return prev;
+        });
     };
 
     return (
