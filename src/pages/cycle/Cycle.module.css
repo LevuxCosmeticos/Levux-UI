@@ -2,18 +2,31 @@
     display: flex;
     margin-top: 5%;
     margin-left: 5%;
+    margin-bottom: 5%;
+    align-items: center;
 }
 
 .customerSelect {
     margin-right: 5%;
-    margin-bottom: 5%;
     width: 25vw;
 }
 
 .cycleSelect {
-    margin-right: 5%;
-    margin-bottom: 5%;
+    margin-right: 10%;
     width: 10vw;
+}
+
+.formButton {
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    cursor: pointer;
+}
+
+.searchIconDisabled {
+    cursor: not-allowed;
 }
 
 @media (max-width: 1440px) {
@@ -46,9 +59,11 @@
 @media (max-width: 425px) {
     .filterForm {
         flex-direction: column;
+        align-items: flex-start;
     }
     .customerSelect {
         width: 70vw;
+        margin-bottom: 5%;
     }
     .cycleSelect {
         width: 50vw;
