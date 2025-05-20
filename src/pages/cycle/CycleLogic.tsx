@@ -40,7 +40,7 @@ class CycleLogic {
         strSearch: string,
         setCustomerFilterOptions: React.Dispatch<React.SetStateAction<CycleCustomerFilterResponse[]>>,
         setLoadingFilters: React.Dispatch<React.SetStateAction<boolean>>,
-        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void,
+        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void
     ) => {
         setLoadingFilters(true);
         const data = await cycleService.getCycleFilterList(strSearch, toaster);
@@ -53,6 +53,19 @@ class CycleLogic {
         selectedCustomer: CycleCustomerFilterResponse | null
     ) => {
         return selectedCustomer && selectedCycle;
+    }
+
+    fetchCycleInformation = async (
+        selectedCycle: CycleFilterResponse | null,
+        selectedCustomer: CycleCustomerFilterResponse | null,
+        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void
+    ) => {
+        const cycleInformation = await cycleService.getCycleInformation(
+            selectedCustomer?.customerId,
+            selectedCycle?.cycle,
+            toaster
+        );
+        return cycleInformation;
     }
 }
 

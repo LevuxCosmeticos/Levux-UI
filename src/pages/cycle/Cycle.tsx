@@ -41,9 +41,14 @@ const Cycle: React.FC = () => {
         );
     }
 
-    const handleFilterSubmit = () => {
+    const handleFilterSubmit = async () => {
         if (cycleLogic.filterFormConcluded(selectedCycle, selectedCustomer)) {
-            console.log('Formulário enviado com sucesso!');
+            const cycleInformation = await cycleLogic.fetchCycleInformation(
+                selectedCycle,
+                selectedCustomer,
+                toaster
+            );
+            console.log(cycleInformation);
         }
     }
 
