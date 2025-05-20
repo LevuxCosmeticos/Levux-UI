@@ -11,9 +11,11 @@ class CycleLogic {
         setCycleFilterOptions: React.Dispatch<React.SetStateAction<CycleFilterResponse[]>>,
         setCustomerFilterOptions: React.Dispatch<React.SetStateAction<CycleCustomerFilterResponse[]>>,
         setLoadingFilters: React.Dispatch<React.SetStateAction<boolean>>,
-        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void
+        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void,
+        setSelectedCustomer: React.Dispatch<React.SetStateAction<CycleCustomerFilterResponse | null>>
     ) => {
         setSelectedCycle(null);
+        setSelectedCustomer(value);
         if (value == null) {
             this.fetchFilters(
                 '',
@@ -44,6 +46,13 @@ class CycleLogic {
         const data = await cycleService.getCycleFilterList(strSearch, toaster);
         setCustomerFilterOptions(data);
         setLoadingFilters(false);
+    }
+
+    filterFormConcluded = (
+        selectedCycle: CycleFilterResponse | null,
+        selectedCustomer: CycleCustomerFilterResponse | null
+    ) => {
+        return selectedCustomer && selectedCycle;
     }
 }
 

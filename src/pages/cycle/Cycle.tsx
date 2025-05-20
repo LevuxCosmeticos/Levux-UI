@@ -5,6 +5,7 @@ import { CycleCustomerFilterResponse } from "../../dto/cycle/filter/CycleCustome
 import { useToaster } from "../../components/toaster/ToasterProvider";
 import formatUtils from "../../utils/format/FormatUtils";
 import { CycleFilterResponse } from "../../dto/cycle/filter/CycleFilterResponse";
+import SearchIcon from '@mui/icons-material/Search';
 import cycleLogic from "./CycleLogic";
 
 const Cycle: React.FC = () => {
@@ -12,6 +13,7 @@ const Cycle: React.FC = () => {
     const toaster = useToaster();
 
     const [customerFilterOptions, setCustomerFilterOptions] = useState<CycleCustomerFilterResponse[]>([]);
+    const [selectedCustomer, setSelectedCustomer] = useState<CycleCustomerFilterResponse | null>(null);
 
     const [cycleFilterOptions, setCycleFilterOptions] = useState<CycleFilterResponse[]>([]);
     const [selectedCycle, setSelectedCycle] = useState<CycleFilterResponse | null>(null);
@@ -34,8 +36,15 @@ const Cycle: React.FC = () => {
             setCycleFilterOptions,
             setCustomerFilterOptions,
             setLoadingFilters,
-            toaster
+            toaster,
+            setSelectedCustomer
         );
+    }
+
+    const handleFilterSubmit = () => {
+        if (cycleLogic.filterFormConcluded(selectedCycle, selectedCustomer)) {
+            console.log('Formulário enviado com sucesso!');
+        }
     }
 
     useEffect(() => {
@@ -44,7 +53,7 @@ const Cycle: React.FC = () => {
 
     return (
         <div>
-            <form className={styles.filterForm}>
+            <form className={styles.filterForm} >
                 <FilteredSelect
                     options={customerFilterOptions}
                     getOptionLabel={(option) => option.customerName}
@@ -57,16 +66,27 @@ const Cycle: React.FC = () => {
                     loading={loadingFilters}
                     label='Empresa'
                 />
-                <FilteredSelect
-                    options={cycleFilterOptions}
-                    getOptionLabel={(option) => option.label}
-                    noOptionsText="Nenhum ciclo encontrado"
-                    className={styles.cycleSelect}
-                    fontSize="100%"
-                    value={selectedCycle}
-                    selectChange={(value) => { setSelectedCycle(value) }}
-                    label='Ciclo'
-                />
+                <div className={styles.formButton}>
+                    <FilteredSelect
+                        options={cycleFilterOptions}
+                        getOptionLabel={(option) => option.label}
+                        noOptionsText="Nenhum ciclo encontrado"
+                        className={styles.cycleSelect}
+                        fontSize="100%"
+                        value={selectedCycle}
+                        selectChange={(value) => { setSelectedCycle(value) }}
+                        label='Ciclo'
+                    />
+                    <SearchIcon
+                        onClick={() => { handleFilterSubmit() }}
+                        className={
+                            cycleLogic.filterFormConcluded(selectedCycle, selectedCustomer)
+                                ? styles.searchIcon
+                                : styles.searchIconDisabled
+                        }
+                        fontSize="large"
+                    />
+                </div>
             </form>
         </div>
     )
