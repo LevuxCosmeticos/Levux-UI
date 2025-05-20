@@ -76,13 +76,16 @@ class CycleLogic {
         if (!cycleResponse) return;
 
         const updatedBalances = cycleResponse.balances.map((balance) =>
-            balance.productId === productId ? { 
-                ...balance, 
-                [field]: (field === 'lift' && typeof newValue === 'number' && newValue > balance.initialBalance) ? balance.initialBalance : newValue
+            balance.productId === productId ? {
+                ...balance,
+                [field]: newValue
             } : balance
         );
 
         updatedBalances.forEach((balance) => {
+            if (balance.initialBalance < balance.lift) {
+                balance.lift = balance.initialBalance;
+            }
             balance.sold = balance.initialBalance - balance.lift;
             balance.finalBalance = balance.initialBalance - balance.sold + balance.replacement;
         });

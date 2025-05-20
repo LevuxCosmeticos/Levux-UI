@@ -10,6 +10,9 @@ import cycleLogic from "./CycleLogic";
 import { CycleResponse } from "../../dto/cycle/filter/CycleResponse";
 import { CycleBalanceResponse } from "../../dto/cycle/filter/CycleBalanceResponse";
 import CycleTable from "../../components/table/cycle/CycleTable";
+import BaseButton from "../../components/button/BaseButton";
+import SaveIcon from '@mui/icons-material/Save';
+import colors from "../../assets/colors/colors";
 
 const Cycle: React.FC = () => {
 
@@ -137,6 +140,23 @@ const Cycle: React.FC = () => {
                 activeCycle={selectedCustomer ? selectedCustomer.actualCycle : 0}
                 onBalanceFieldChange={handleBalanceFieldChange}
             />
+            {
+                updatedProductIds.length > 0 &&
+                <BaseButton
+                    text='SALVAR'
+                    onClick={() => { }}
+                    loading={loadingTable}
+                    icon={SaveIcon}
+                    backGroundColor={colors.gray}
+                    variant='contained'
+                    border='1px solid white'
+                    borderRadius='10vw'
+                    fontSize='100%'
+                    spinnerSize={25}
+                    className={styles.button}
+                />
+            }
+
         </div>
     )
 }
