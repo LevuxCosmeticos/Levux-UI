@@ -3,9 +3,9 @@ import styles from './Cycle.module.css';
 import FilteredSelect from "../../components/select/FilteredSelect";
 import { CycleCustomerFilterResponse } from "../../dto/cycle/filter/CycleCustomerFilterResponse";
 import { useToaster } from "../../components/toaster/ToasterProvider";
-import cycleService from "../../service/cycle/CycleService";
 import formatUtils from "../../utils/format/FormatUtils";
 import { CycleFilterResponse } from "../../dto/cycle/filter/CycleFilterResponse";
+import cycleLogic from "./CycleLogic";
 
 const Cycle: React.FC = () => {
 
@@ -18,28 +18,24 @@ const Cycle: React.FC = () => {
 
     const [loadingFilters, setLoadingFilters] = useState(false);
 
-    const fetchFilters = async (strSearch: string) => {
-        setLoadingFilters(true);
-        const data = await cycleService.getCycleFilterList(strSearch, toaster);
-        setCustomerFilterOptions(data);
-        setLoadingFilters(false);
+    const fetchFilters = (strSearch: string) => {
+        cycleLogic.fetchFilters(
+            strSearch,
+            setCustomerFilterOptions,
+            setLoadingFilters,
+            toaster
+        );
     }
 
-    const handleCustomerFilterSelectChange = (value: CycleCustomerFilterResponse) => {
-        setSelectedCycle(null);
-        if (value == null) {
-            fetchFilters('');
-            setCycleFilterOptions([]);
-        } else {
-            const cycleOptions: CycleFilterResponse[] = [];
-            for (let i = 1; i <= value.actualCycle; i++) {
-                cycleOptions.push({
-                    cycle: i,
-                    label: `Ciclo ${i}`
-                });
-            };
-            setCycleFilterOptions(cycleOptions);
-        }
+    const handleCustomerChange = (value: CycleCustomerFilterResponse) => {
+        cycleLogic.handleCustomerFilterSelectChange(
+            value,
+            setSelectedCycle,
+            setCycleFilterOptions,
+            setCustomerFilterOptions,
+            setLoadingFilters,
+            toaster
+        );
     }
 
     useEffect(() => {
@@ -57,7 +53,7 @@ const Cycle: React.FC = () => {
                     className={styles.customerSelect}
                     fontSize="100%"
                     textChange={(value) => { fetchFilters(value) }}
-                    selectChange={(value) => { handleCustomerFilterSelectChange(value) }}
+                    selectChange={(value) => { handleCustomerChange(value) }}
                     loading={loadingFilters}
                     label='Empresa'
                 />
@@ -68,7 +64,7 @@ const Cycle: React.FC = () => {
                     className={styles.cycleSelect}
                     fontSize="100%"
                     value={selectedCycle}
-                    selectChange={(value) => {setSelectedCycle(value)}}
+                    selectChange={(value) => { setSelectedCycle(value) }}
                     label='Ciclo'
                 />
             </form>
