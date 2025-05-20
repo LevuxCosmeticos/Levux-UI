@@ -33,7 +33,7 @@ export const tableEmpty = () => {
                     height="100px"
                     sx={{ color: 'black' }}
                 >
-                    <h1>Sem dados, selecione uma opção e clique no botão de pesquisa.</h1>
+                    <h1 className={styles.emptyTable}>Sem dados, selecione uma opção e clique no botão de pesquisa.</h1>
                 </Box>
             </TableCell>
         </TableRow>

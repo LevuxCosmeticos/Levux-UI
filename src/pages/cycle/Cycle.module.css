@@ -38,6 +38,7 @@
     .customerSelect {
         width: 40vw;
     }
+
     .cycleSelect {
         width: 15vw;
     }
@@ -46,9 +47,15 @@
 @media (max-width: 1024px) {
     .customerSelect {
         width: 40vw;
+        margin-right: 2%;
     }
+
     .cycleSelect {
         width: 20vw;
+    }
+
+    .filterForm {
+        margin-bottom: 2%;
     }
 }
 
@@ -56,6 +63,7 @@
     .customerSelect {
         width: 40vw;
     }
+
     .cycleSelect {
         width: 25vw;
     }
@@ -65,11 +73,14 @@
     .filterForm {
         flex-direction: column;
         align-items: flex-start;
+        margin-bottom: 5%;
     }
+
     .customerSelect {
         width: 70vw;
         margin-bottom: 5%;
     }
+
     .cycleSelect {
         width: 50vw;
     }
