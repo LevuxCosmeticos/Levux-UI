@@ -14,7 +14,7 @@ export const tableLoading = () => {
                     justifyContent="center"
                     alignItems="center"
                     height="100px"
-                    sx={{ color: 'black' }}
+                    sx={{ color: 'white' }}
                 >
                     <CircularProgress color='inherit' />
                 </Box>
