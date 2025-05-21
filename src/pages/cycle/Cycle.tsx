@@ -12,6 +12,7 @@ import { CycleBalanceResponse } from "../../dto/cycle/filter/CycleBalanceRespons
 import CycleTable from "../../components/table/cycle/CycleTable";
 import BaseButton from "../../components/button/BaseButton";
 import SaveIcon from '@mui/icons-material/Save';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import colors from "../../assets/colors/colors";
 
 const Cycle: React.FC = () => {
@@ -28,6 +29,7 @@ const Cycle: React.FC = () => {
     const [loadingFilters, setLoadingFilters] = useState(false);
     const [loadingTable, setLoadingTable] = useState(false);
     const [loadingEdition, setLoadingEdition] = useState(false);
+    const [loadingEndCycle, setLoadingEndCycle] = useState(false);
 
     const [updatedProductIds, setUpdatedProductIds] = useState<number[]>([]);
 
@@ -56,6 +58,7 @@ const Cycle: React.FC = () => {
 
     const handleFilterSubmit = async () => {
         setLoadingTable(true);
+        setCycleResponse(null);
         setUpdatedProductIds([]);
         if (cycleLogic.filterFormConcluded(selectedCycle, selectedCustomer)) {
             const response = await cycleLogic.fetchCycleInformation(
@@ -168,7 +171,25 @@ const Cycle: React.FC = () => {
                     className={styles.button}
                 />
             }
-
+            {
+                updatedProductIds.length === 0 &&
+                cycleResponse &&
+                selectedCustomer && 
+                cycleResponse.cycle === selectedCustomer.actualCycle &&
+                <BaseButton
+                    text='ENCERRAR CICLO'
+                    onClick={() => console.log('Encerrar ciclo')}
+                    loading={loadingEndCycle}
+                    icon={DoneAllIcon}
+                    backGroundColor={colors.gray}
+                    variant='contained'
+                    border='1px solid white'
+                    borderRadius='10vw'
+                    fontSize='100%'
+                    spinnerSize={25}
+                    className={styles.button}
+                />
+            }
         </div>
     )
 }
