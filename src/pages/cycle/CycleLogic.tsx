@@ -4,6 +4,8 @@ import { CycleResponse } from "../../dto/cycle/filter/CycleResponse";
 import { CycleBalanceResponse } from "../../dto/cycle/filter/CycleBalanceResponse";
 import cycleService from "../../service/cycle/CycleService";
 import { Severity, Variant } from '../../components/toaster/ToasterProvider';
+import { CycleBalanceUpdateRequest } from "../../dto/cycle/update/request/CycleBalanceUpdateRequest";
+import { CycleUpdateRequest } from "../../dto/cycle/update/request/CycleUpdateRequest";
 
 class CycleLogic {
 
@@ -83,14 +85,56 @@ class CycleLogic {
         );
 
         updatedBalances.forEach((balance) => {
-            if (balance.initialBalance < balance.lift) {
-                balance.lift = balance.initialBalance;
-            }
+            if (balance.initialBalance < balance.lift) balance.lift = balance.initialBalance;
+            if (balance.initialBalance === 0) balance.replacement = 0;
             balance.sold = balance.initialBalance - balance.lift;
             balance.finalBalance = balance.initialBalance - balance.sold + balance.replacement;
         });
 
         setCycleResponse({ ...cycleResponse, balances: updatedBalances });
+    }
+
+    saveCycleEdition = async (
+        cycleResponse: CycleResponse | null,
+        updatedProductIds: number[],
+        setLoadingEdition: React.Dispatch<React.SetStateAction<boolean>>,
+        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void,
+        setCycleResponse: React.Dispatch<React.SetStateAction<CycleResponse | null>>,
+        setUpdatedProductIds: React.Dispatch<React.SetStateAction<number[]>>
+    ) => {
+        setLoadingEdition(true);
+        if (!cycleResponse) return;
+        if (updatedProductIds.length === 0) return;
+
+        const cycleBalanceUpdateRequest = cycleResponse.balances
+            .filter((balance) => updatedProductIds.includes(balance.productId))
+            .filter((balance) => balance.initialBalance !== 0)
+            .map((balance) => {
+                return {
+                    productId: balance.productId,
+                    initialBalance: balance.initialBalance,
+                    lift: balance.lift,
+                    replacement: balance.replacement
+                }
+            }) as CycleBalanceUpdateRequest[];
+
+        const cycleUpdateRequest = {
+            customerId: cycleResponse.customerId,
+            cycleNumber: cycleResponse.cycle,
+            cycleBalanceUpdates: cycleBalanceUpdateRequest
+        } as CycleUpdateRequest;
+
+        const response = await cycleService.updateCycle(
+            cycleUpdateRequest,
+            toaster
+        );
+
+        if (response) {
+            setCycleResponse(response);
+            setUpdatedProductIds([]);
+        }
+
+        setLoadingEdition(false);
     }
 }
 

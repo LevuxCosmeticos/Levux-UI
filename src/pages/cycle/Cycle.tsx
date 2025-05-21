@@ -27,6 +27,7 @@ const Cycle: React.FC = () => {
 
     const [loadingFilters, setLoadingFilters] = useState(false);
     const [loadingTable, setLoadingTable] = useState(false);
+    const [loadingEdition, setLoadingEdition] = useState(false);
 
     const [updatedProductIds, setUpdatedProductIds] = useState<number[]>([]);
 
@@ -73,10 +74,6 @@ const Cycle: React.FC = () => {
         setUpdatedProductIds([]);
     }
 
-    useEffect(() => {
-        fetchFilters('');
-    }, []);
-
     const handleBalanceFieldChange = <K extends keyof CycleBalanceResponse>(
         productId: number,
         field: K,
@@ -96,6 +93,21 @@ const Cycle: React.FC = () => {
             return prev;
         });
     };
+
+    const handleSaveEdit = async () => {
+        cycleLogic.saveCycleEdition(
+            cycleResponse,
+            updatedProductIds,
+            setLoadingEdition,
+            toaster,
+            setCycleResponse,
+            setUpdatedProductIds
+        );
+    }
+
+    useEffect(() => {
+        fetchFilters('');
+    }, []);
 
     return (
         <div className={styles.cyclePage}>
@@ -144,8 +156,8 @@ const Cycle: React.FC = () => {
                 updatedProductIds.length > 0 &&
                 <BaseButton
                     text='SALVAR'
-                    onClick={() => { }}
-                    loading={loadingTable}
+                    onClick={() => handleSaveEdit()}
+                    loading={loadingEdition}
                     icon={SaveIcon}
                     backGroundColor={colors.gray}
                     variant='contained'
