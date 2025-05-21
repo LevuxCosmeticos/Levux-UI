@@ -54,16 +54,19 @@ export const tableWithData = (
     const isActiveCycle = data?.cycle === activeCycle;
 
     const editableFields = (
-        value: number, 
-        productId: number, 
+        value: number,
+        productId: number,
         field: keyof CycleBalanceResponse,
+        row: CycleBalanceResponse,
         max?: number
     ) => {
         return isActiveCycle ?
             <TextField
                 type="number"
                 value={value}
-                onChange={(e) => onBalanceFieldChange(productId, field, Number(e.target.value))}
+                onChange={(e) => {
+                    if (row.initialBalance !== 0 || field === 'initialBalance') onBalanceFieldChange(productId, field, Number(e.target.value))
+                }}
                 inputProps={{
                     min: 0,
                     max: max
@@ -94,10 +97,10 @@ export const tableWithData = (
     return rows?.map((row) => (
         <TableRow key={row.productId}>
             <TableCell className={styles.tableRow}>{row.productName}</TableCell>
-            <TableCell className={styles.tableRow}>{row.isNew ? editableFields(row.initialBalance, row.productId, 'initialBalance') : row.initialBalance}</TableCell>
-            <TableCell className={styles.tableRow}>{editableFields(row.lift, row.productId, 'lift', row.initialBalance)}</TableCell>
+            <TableCell className={styles.tableRow}>{row.isNew ? editableFields(row.initialBalance, row.productId, 'initialBalance', row) : row.initialBalance}</TableCell>
+            <TableCell className={styles.tableRow}>{editableFields(row.lift, row.productId, 'lift', row, row.initialBalance)}</TableCell>
             <TableCell className={styles.tableRow}>{row.sold}</TableCell>
-            <TableCell className={styles.tableRow}>{editableFields(row.replacement, row.productId, 'replacement')}</TableCell>
+            <TableCell className={styles.tableRow}>{editableFields(row.replacement, row.productId, 'replacement', row)}</TableCell>
             <TableCell className={styles.tableRow}>{row.finalBalance}</TableCell>
         </TableRow>
     ));
