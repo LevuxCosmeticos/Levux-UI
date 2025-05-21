@@ -136,6 +136,43 @@ class CycleLogic {
 
         setLoadingEdition(false);
     }
+
+    closeCycle = async (
+        cycleResponse: CycleResponse | null,
+        setLoadingEndCycle: React.Dispatch<React.SetStateAction<boolean>>,
+        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void,
+        setSelectedCustomer: React.Dispatch<React.SetStateAction<CycleCustomerFilterResponse | null>>,
+        setCycleResponse: React.Dispatch<React.SetStateAction<CycleResponse | null>>,
+        setCycleFilterOptions: React.Dispatch<React.SetStateAction<CycleFilterResponse[]>>,
+        setSelectedCycle: React.Dispatch<React.SetStateAction<CycleFilterResponse | null>>
+    ) => {
+        setLoadingEndCycle(true);
+        if (!cycleResponse) return;
+
+        const response = await cycleService.closeCycle(
+            cycleResponse.customerId,
+            cycleResponse.cycle,
+            toaster
+        );
+
+        if (response) {
+            const newCycle = response.cycle;
+            const newFilterOption = {
+                cycle: newCycle,
+                label: `Ciclo ${newCycle}`
+            } as CycleFilterResponse;
+
+            setSelectedCustomer(prev => prev ? { ...prev, actualCycle: newCycle } : prev);
+            setCycleFilterOptions(prev => [
+                ...prev,
+                newFilterOption
+            ]);
+            setSelectedCycle(newFilterOption);
+            setCycleResponse(response);
+        }
+
+        setLoadingEndCycle(false);
+    }
 }
 
 const cycleLogic = new CycleLogic();

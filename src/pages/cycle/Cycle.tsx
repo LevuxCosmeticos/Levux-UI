@@ -108,6 +108,18 @@ const Cycle: React.FC = () => {
         );
     }
 
+    const handleCloseCycle = async () => {
+        cycleLogic.closeCycle(
+            cycleResponse,
+            setLoadingEndCycle,
+            toaster,
+            setSelectedCustomer,
+            setCycleResponse,
+            setCycleFilterOptions,
+            setSelectedCycle
+        );
+    }
+
     useEffect(() => {
         fetchFilters('');
     }, []);
@@ -174,11 +186,11 @@ const Cycle: React.FC = () => {
             {
                 updatedProductIds.length === 0 &&
                 cycleResponse &&
-                selectedCustomer && 
+                selectedCustomer &&
                 cycleResponse.cycle === selectedCustomer.actualCycle &&
                 <BaseButton
                     text='ENCERRAR CICLO'
-                    onClick={() => console.log('Encerrar ciclo')}
+                    onClick={handleCloseCycle}
                     loading={loadingEndCycle}
                     icon={DoneAllIcon}
                     backGroundColor={colors.gray}

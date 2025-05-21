@@ -82,6 +82,36 @@ class CycleService {
 
     }
 
+    async closeCycle(
+        customerId: number,
+        cycleNumber: number,
+        toaster: (message: string, autoHideDuration: number, severity: Severity, variant: Variant) => void
+    ): Promise<CycleResponse | null> {
+        try {
+            const response = await axios.post<CycleResponse>(
+                this.cycleUrl + '/close',
+                {},
+                {
+                    params: {
+                        customerId: customerId,
+                        cycleNumber: cycleNumber
+                    }
+                }
+            );
+            if (response.data && Array.isArray(response.data.balances)) {
+                response.data.balances = response.data.balances.map(balance => ({
+                    ...balance,
+                    isNew: balance.initialBalance === 0
+                }));
+            }
+            toaster('Ciclo fechado com sucesso!', 5000, 'success', 'filled');
+            return response.data;
+        } catch {
+            toaster('Ocorreu um erro, tente novamente mais tarde.', 5000, 'error', 'filled');
+            return null;
+        }
+    }
+
 }
 
 const cycleService = new CycleService();
