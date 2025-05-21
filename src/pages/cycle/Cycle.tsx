@@ -186,6 +186,7 @@ const Cycle: React.FC = () => {
             {
                 updatedProductIds.length === 0 &&
                 cycleResponse &&
+                cycleResponse.balances?.filter((balance) => balance.initialBalance !== 0).length > 0 &&
                 selectedCustomer &&
                 cycleResponse.cycle === selectedCustomer.actualCycle &&
                 <BaseButton
