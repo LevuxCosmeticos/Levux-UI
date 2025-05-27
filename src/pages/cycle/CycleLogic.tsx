@@ -173,6 +173,17 @@ class CycleLogic {
 
         setLoadingEndCycle(false);
     }
+
+    shouldGeneratePdf = (
+        updatedProductIds: number[],
+        cycleResponse: CycleResponse | null,
+        selectedCustomer: CycleCustomerFilterResponse | null
+    ): boolean => {
+        return updatedProductIds.length === 0 &&
+            cycleResponse !== null &&
+            cycleResponse.balances?.filter((balance) => balance.initialBalance !== 0).length > 0 &&
+            selectedCustomer !== null
+    }
 }
 
 const cycleLogic = new CycleLogic();
