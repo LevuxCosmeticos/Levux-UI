@@ -14,6 +14,7 @@ import BaseButton from "../../components/button/BaseButton";
 import SaveIcon from '@mui/icons-material/Save';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import colors from "../../assets/colors/colors";
+import PageLoading from "../../components/loading/PageLoading";
 
 const Cycle: React.FC = () => {
 
@@ -30,6 +31,7 @@ const Cycle: React.FC = () => {
     const [loadingTable, setLoadingTable] = useState(false);
     const [loadingEdition, setLoadingEdition] = useState(false);
     const [loadingEndCycle, setLoadingEndCycle] = useState(false);
+    const [loadingPdf, setLoadingPdf] = useState(false);
 
     const [updatedProductIds, setUpdatedProductIds] = useState<number[]>([]);
 
@@ -122,13 +124,15 @@ const Cycle: React.FC = () => {
         );
     }
 
-    const handlePdfIconClick = () => {
+    const handlePdfIconClick = async () => {
         if (cycleLogic.shouldGeneratePdf(
             updatedProductIds,
             cycleResponse,
             selectedCustomer
         )) {
-            console.log('Generate PDF');
+            setLoadingPdf(true);
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            setLoadingPdf(false);
         } else {
             console.log('Cannot generate PDF, no changes made');
         }
@@ -227,6 +231,7 @@ const Cycle: React.FC = () => {
                     className={styles.button}
                 />
             }
+            <PageLoading loading={loadingPdf} />
         </div>
     )
 }
