@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import LocalEnvironment from "../../config/LocalEnvironment";
 import { Severity, Variant } from "../../components/toaster/ToasterProvider";
 import { CycleCustomerFilterResponse } from "../../dto/cycle/filter/CycleCustomerFilterResponse";
@@ -108,6 +108,29 @@ class CycleService {
             return response.data;
         } catch {
             toaster('Ocorreu um erro, tente novamente mais tarde.', 5000, 'error', 'filled');
+            return null;
+        }
+    }
+
+    async getCyclePdf(
+        customerId: number,
+        cycleNumber: number,
+        toaster: (message: string, autoHideDuration: number, severity: Severity, variant: Variant) => void
+    ): Promise<AxiosResponse | null> {
+        try {
+            const response = await axios.get(
+                this.cycleUrl + '/pdf',
+                {
+                    params: {
+                        customerId: customerId,
+                        cycleNumber: cycleNumber
+                    },
+                    responseType: 'blob'
+                }
+            );
+            return response;
+        } catch {
+            toaster('Ocorreu um erro ao gerar o PDF, tente novamente mais tarde.', 5000, 'error', 'filled');
             return null;
         }
     }

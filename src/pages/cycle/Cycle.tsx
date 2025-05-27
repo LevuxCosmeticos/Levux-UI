@@ -131,10 +131,8 @@ const Cycle: React.FC = () => {
             selectedCustomer
         )) {
             setLoadingPdf(true);
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await cycleLogic.generatePdf(cycleResponse, toaster)
             setLoadingPdf(false);
-        } else {
-            console.log('Cannot generate PDF, no changes made');
         }
     }
 

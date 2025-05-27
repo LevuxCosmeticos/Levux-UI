@@ -184,6 +184,31 @@ class CycleLogic {
             cycleResponse.balances?.filter((balance) => balance.initialBalance !== 0).length > 0 &&
             selectedCustomer !== null
     }
+
+    generatePdf = async (
+        cycleResponse: CycleResponse | null,
+        toaster: (message: string, autoHideDuration?: number, severity?: Severity, variant?: Variant) => void
+    ) => {
+        if (!cycleResponse) return;
+
+        const response = await cycleService.getCyclePdf(
+            cycleResponse.customerId,
+            cycleResponse.cycle,
+            toaster
+        );
+
+        if (response) {
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = `${cycleResponse.customerName}_Ciclo_${cycleResponse.cycle}.pdf`;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+    }
 }
 
 const cycleLogic = new CycleLogic();
