@@ -92,6 +92,8 @@ const Cycle: React.FC = () => {
         setUpdatedProductIds((prev) => {
             if (!prev.includes(productId)) {
                 return [...prev, productId];
+            } else if (newValue === 0 && field === 'initialBalance') {
+                return prev.filter(id => id !== productId);
             }
             return prev;
         });
@@ -118,6 +120,18 @@ const Cycle: React.FC = () => {
             setCycleFilterOptions,
             setSelectedCycle
         );
+    }
+
+    const handlePdfIconClick = () => {
+        if (cycleLogic.shouldGeneratePdf(
+            updatedProductIds,
+            cycleResponse,
+            selectedCustomer
+        )) {
+            console.log('Generate PDF');
+        } else {
+            console.log('Cannot generate PDF, no changes made');
+        }
     }
 
     useEffect(() => {
@@ -166,6 +180,16 @@ const Cycle: React.FC = () => {
                 loading={loadingTable}
                 activeCycle={selectedCustomer ? selectedCustomer.actualCycle : 0}
                 onBalanceFieldChange={handleBalanceFieldChange}
+                pdfClassName={
+                    cycleLogic.shouldGeneratePdf(
+                        updatedProductIds,
+                        cycleResponse,
+                        selectedCustomer
+                    ) ?
+                        styles.pdfIconActive :
+                        styles.pdfIconDisabled
+                }
+                onPdfIconClick={handlePdfIconClick}
             />
             {
                 updatedProductIds.length > 0 &&
