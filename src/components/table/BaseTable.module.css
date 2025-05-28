@@ -1,11 +1,12 @@
 @import '../../assets/colors/colors.css';
 
 .headerCell {
-  color: white !important;
+  color: var(--gold) !important;
   font-weight: bold !important;
   text-align: center !important;
   font-size: 1.2vw !important;
   background-color: var(--gray) !important;
+  border-bottom: 1px solid var(--gold) !important;
 }
 
 .sticky {
@@ -13,10 +14,11 @@
 }
 
 .bodyCell {
-  color: white !important;
+  color: var(--gold) !important;
   text-align: center !important;
   font-size: 1vw !important;
   background-color: var(--gray) !important;
+  border-bottom: 1px solid var(--gold) !important;
 }
 
 .tableContainer {

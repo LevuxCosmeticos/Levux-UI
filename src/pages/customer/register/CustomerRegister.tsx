@@ -58,6 +58,7 @@ const CustomerRegister: React.FC<CustomerRegisterProps> = ({ openModal, setOpenM
                         onBlur={registerFormik.handleBlur}
                         error={registerFormik.touched.name && Boolean(registerFormik.errors.name)}
                         helperText={registerFormik.touched.name && registerFormik.errors.name}
+                        color={colors.gold}
                     />
                     <BaseTextField
                         className={styles.text}
@@ -71,6 +72,7 @@ const CustomerRegister: React.FC<CustomerRegisterProps> = ({ openModal, setOpenM
                         error={registerFormik.touched.taxId && Boolean(registerFormik.errors.taxId)}
                         helperText={registerFormik.touched.taxId && registerFormik.errors.taxId}
                         maxLength={18}
+                        color={colors.gold}
                     />
                     <BaseButton
                         text='SALVAR'
@@ -79,11 +81,12 @@ const CustomerRegister: React.FC<CustomerRegisterProps> = ({ openModal, setOpenM
                         icon={SaveIcon}
                         backGroundColor={colors.lightGray}
                         variant='contained'
-                        border='1px solid white'
+                        border={`1px solid ${colors.gold}`}
                         borderRadius='10vw'
                         fontSize='80%'
                         spinnerSize={25}
                         className={styles.button}
+                        color={colors.gold}
                     />
                 </form>
             </div>

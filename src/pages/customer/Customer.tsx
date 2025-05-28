@@ -56,9 +56,10 @@ const Customer: React.FC = () => {
                     variant='contained'
                     backGroundColor={colors.gray}
                     fontSize='60%'
-                    border='1px solid white'
+                    border={`1px solid ${colors.gold}`}
                     borderRadius='10vw'
                     onClick={() => setOpenModal(true)}
+                    color={colors.gold}
                 />
             </div>
             <CustomerRegister

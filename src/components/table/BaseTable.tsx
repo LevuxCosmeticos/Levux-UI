@@ -1,6 +1,7 @@
 import styles from './BaseTable.module.css';
 import { Table, TableCell, TableContainer, TableRow, TableHead, TableBody, Paper, CircularProgress, Box } from "@mui/material"
 import TableHeader from '../../dto/table/TableHeader';
+import colors from '../../assets/colors/colors';
 
 interface BaseTableProps<T> {
     headers: TableHeader[]
@@ -45,9 +46,9 @@ const BaseTable = <T extends Record<string, any>>({
                                         justifyContent="center"
                                         alignItems="center" 
                                         height="100px"
-                                        sx={{ color: 'white' }}
+                                        sx={{ color: colors.gold }}
                                     >
-                                        <CircularProgress color='inherit'/>
+                                        <CircularProgress sx={{ color: colors.gold }}/>
                                     </Box>
                                 </TableCell>
                             </TableRow>
