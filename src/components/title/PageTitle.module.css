@@ -1,12 +1,15 @@
+@import '../../assets/colors/colors.css';
+
 .title {
     font-size: 2.5vw;
     margin-bottom: 1vh;
+    color: var(--gold);
 }
 
 .container {
     display: flex;
     justify-content: center;
-    border-bottom: 1px white solid;
+    border-bottom: 1px var(--gold) solid;
     width: fit-content;
     margin-left: 3vw;
     margin-bottom: 5vh;
