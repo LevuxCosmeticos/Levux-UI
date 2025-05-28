@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import colors from '../../assets/colors/colors';
+import { Paper } from '@mui/material';
 
 interface FilteredSelectionProps<T> {
     options: T[];
@@ -73,7 +75,11 @@ const FilteredSelect = <T extends Record<string, any>>({
             renderOption={(props, option) => {
                 const { key, ...rest } = props;
                 return (
-                    <li key={key} {...rest}>
+                    <li key={key} {...rest}
+                        style={{
+                            backgroundColor: colors.gray,
+                            color: color
+                        }}>
                         <div>
                             <div>{getOptionLabel(option)}</div>
                             {getOptionSubLabel && (
@@ -130,6 +136,17 @@ const FilteredSelect = <T extends Record<string, any>>({
                     }}
                 />
             }
+            PaperComponent={(props) => (
+                <Paper
+                    {...props}
+                    sx={{
+                        backgroundColor: colors.gray,
+                        boxShadow: 'none',
+                        margin: 0,
+                        padding: 0,
+                    }}
+                />
+            )}
         />
     );
 }

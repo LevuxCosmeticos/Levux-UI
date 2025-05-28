@@ -154,6 +154,7 @@ const Cycle: React.FC = () => {
                     selectChange={(value) => { handleCustomerChange(value) }}
                     loading={loadingFilters}
                     label='Empresa'
+                    color={colors.gold}
                 />
                 <div className={styles.formButton}>
                     <FilteredSelect
@@ -165,6 +166,7 @@ const Cycle: React.FC = () => {
                         value={selectedCycle}
                         selectChange={(value) => { handleCycleChange(value) }}
                         label='Ciclo'
+                        color={colors.gold}
                     />
                     <SearchIcon
                         onClick={() => { handleFilterSubmit() }}
@@ -174,6 +176,9 @@ const Cycle: React.FC = () => {
                                 : styles.searchIconDisabled
                         }
                         fontSize="large"
+                        sx={{
+                            color: colors.gold
+                        }}
                     />
                 </div>
             </form>
@@ -202,11 +207,12 @@ const Cycle: React.FC = () => {
                     icon={SaveIcon}
                     backGroundColor={colors.gray}
                     variant='contained'
-                    border='1px solid white'
+                    border= {`1px solid ${colors.gold}`}
                     borderRadius='10vw'
                     fontSize='100%'
                     spinnerSize={25}
                     className={styles.button}
+                    color={colors.gold}
                 />
             }
             {
@@ -222,11 +228,12 @@ const Cycle: React.FC = () => {
                     icon={DoneAllIcon}
                     backGroundColor={colors.gray}
                     variant='contained'
-                    border='1px solid white'
+                    border={`1px solid ${colors.gold}`}
                     borderRadius='10vw'
                     fontSize='100%'
                     spinnerSize={25}
                     className={styles.button}
+                    color={colors.gold}
                 />
             }
             <PageLoading loading={loadingPdf} />
