@@ -41,7 +41,7 @@ const BaseTable = <T extends Record<string, any>>({
                     <TableBody>
                         {loading ? (
                             <TableRow>
-                                <TableCell colSpan={headers.length}>
+                                <TableCell colSpan={headers.length} className={styles.bodyCell}>
                                     <Box display="flex"
                                         justifyContent="center"
                                         alignItems="center" 
