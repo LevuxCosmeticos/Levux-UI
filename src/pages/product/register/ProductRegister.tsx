@@ -72,6 +72,7 @@ const ProductRegister: React.FC<ProductRegisterProps> = ({ openModal, setOpenMod
                         onBlur={registerFormik.handleBlur}
                         error={registerFormik.touched.name && Boolean(registerFormik.errors.name)}
                         helperText={registerFormik.touched.name && registerFormik.errors.name}
+                        color={colors.gold}
                     />
                     <BaseTextField
                         className={styles.text}
@@ -84,6 +85,7 @@ const ProductRegister: React.FC<ProductRegisterProps> = ({ openModal, setOpenMod
                         onBlur={registerFormik.handleBlur}
                         error={registerFormik.touched.code && Boolean(registerFormik.errors.code)}
                         helperText={registerFormik.touched.code && registerFormik.errors.code}
+                        color={colors.gold}
                     />
                     <BaseTextField
                         initialAdornment='R$'
@@ -97,6 +99,7 @@ const ProductRegister: React.FC<ProductRegisterProps> = ({ openModal, setOpenMod
                         onBlur={registerFormik.handleBlur}
                         error={registerFormik.touched.value && Boolean(registerFormik.errors.value)}
                         helperText={registerFormik.touched.value && registerFormik.errors.value}
+                        color={colors.gold}
                     />
                     <BaseButton
                         text='SALVAR'
@@ -105,11 +108,12 @@ const ProductRegister: React.FC<ProductRegisterProps> = ({ openModal, setOpenMod
                         icon={SaveIcon}
                         backGroundColor={colors.lightGray}
                         variant='contained'
-                        border='1px solid white'
+                        border={`1px solid ${colors.gold}`}
                         borderRadius='10vw'
                         fontSize='80%'
                         spinnerSize={25}
                         className={styles.button}
+                        color={colors.gold}
                     />
                 </form>
             </div>
