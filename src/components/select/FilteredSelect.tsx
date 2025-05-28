@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import colors from '../../assets/colors/colors';
-import { Paper } from '@mui/material';
+import { Paper, Popper } from '@mui/material';
 
 interface FilteredSelectionProps<T> {
     options: T[];
@@ -144,6 +144,32 @@ const FilteredSelect = <T extends Record<string, any>>({
                         boxShadow: 'none',
                         margin: 0,
                         padding: 0,
+                        color: color
+                    }}
+                />
+            )}
+            PopperComponent={(props) => (
+                <Popper
+                    {...props}
+                    modifiers={[
+                        {
+                            name: 'offset',
+                            options: {
+                                offset: [0, 4],
+                            },
+                        },
+                    ]}
+                    sx={{
+                        '& .MuiAutocomplete-listbox': {
+                            backgroundColor: colors.gray,
+                            color: color,
+                        },
+                        '& .MuiAutocomplete-noOptions': {
+                            color: color,
+                        },
+                        '& .MuiAutocomplete-loading': {
+                            color: color,
+                        },
                     }}
                 />
             )}
