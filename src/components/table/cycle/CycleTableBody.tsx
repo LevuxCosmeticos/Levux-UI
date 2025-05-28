@@ -3,18 +3,19 @@ import { TableCell, TableRow, CircularProgress, Box, TextField } from "@mui/mate
 import { cycleTableHeader } from "./CycleTableHeader"
 import { CycleResponse } from "../../../dto/cycle/filter/CycleResponse";
 import { CycleBalanceResponse } from "../../../dto/cycle/filter/CycleBalanceResponse";
+import colors from "../../../assets/colors/colors";
 
 const headers = cycleTableHeader;
 
 export const tableLoading = () => {
     return (
         <TableRow>
-            <TableCell colSpan={headers.length}>
+            <TableCell colSpan={headers.length} sx={{ borderBottom: `1px solid ${colors.gold}`}}>
                 <Box display="flex"
                     justifyContent="center"
                     alignItems="center"
                     height="100px"
-                    sx={{ color: 'white' }}
+                    sx={{ color: colors.gold }}
                 >
                     <CircularProgress color='inherit' />
                 </Box>
@@ -26,7 +27,7 @@ export const tableLoading = () => {
 export const tableEmpty = () => {
     return (
         <TableRow>
-            <TableCell colSpan={headers.length}>
+            <TableCell colSpan={headers.length} sx={{ borderBottom: `1px solid ${colors.gold}`}}>
                 <Box display="flex"
                     justifyContent="center"
                     alignItems="center"
@@ -73,7 +74,7 @@ export const tableWithData = (
                 }}
                 sx={{
                     input: {
-                        color: 'white',
+                        color: colors.gold,
                         fontSize: '100%',
                         '&:-webkit-autofill': {
                             WebkitTextFillColor: 'white',
@@ -83,11 +84,11 @@ export const tableWithData = (
                         textAlign: 'center',
                         width: `${Math.max(String(value).length, 8)}ch`,
                     },
-                    label: { color: 'white' },
+                    label: { color: colors.gold },
                     '& .MuiOutlinedInput-root': {
-                        '& fieldset': { borderColor: 'white' },
-                        '&:hover fieldset': { borderColor: 'white' },
-                        '&.Mui-focused fieldset': { borderColor: 'white' },
+                        '& fieldset': { borderColor: colors.gold },
+                        '&:hover fieldset': { borderColor: colors.gold },
+                        '&.Mui-focused fieldset': { borderColor: colors.gold },
                     }
                 }}
             /> :

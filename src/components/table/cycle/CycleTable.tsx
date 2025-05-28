@@ -6,6 +6,7 @@ import formatUtils from "../../../utils/format/FormatUtils";
 import { cycleTableHeader } from "./CycleTableHeader";
 import { tableEmpty, tableLoading, tableWithData } from "./CycleTableBody";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import colors from "../../../assets/colors/colors";
 
 interface CycleTableProps {
     data: CycleResponse | null,
@@ -44,6 +45,9 @@ const CycleTable = ({
                 <PictureAsPdfIcon
                     className={pdfClassName}
                     onClick={onPdfIconClick}
+                    sx={{
+                        color: colors.gold
+                    }}
                 />
             </div>
             <Paper className={styles.paper}>

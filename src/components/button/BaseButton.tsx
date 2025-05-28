@@ -38,7 +38,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
         >
             <Button
                 variant={variant}
-                startIcon={Icon && !loading ? <Icon /> : null}
+                startIcon={Icon && !loading ? <Icon sx={{ color: color }}/> : null}
                 onClick={onClick}
                 type={type}
                 sx={{
@@ -49,7 +49,8 @@ const BaseButton: React.FC<BaseButtonProps> = ({
                     maxWidth: '100%',
                     height: '100%',
                     border: border,
-                    borderRadius: borderRadius
+                    borderRadius: borderRadius,
+                    color: color
                 }}
             >
                 {
