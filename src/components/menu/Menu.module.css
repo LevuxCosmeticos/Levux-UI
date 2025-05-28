@@ -7,12 +7,12 @@
 }
 
 .icon {
-    color: white;
+    color: var(--gold);
     margin-right: 1vw;
 }
 
 .itemHeader {
-    color: white;
+    color: var(--gold);
     font-size: 2.5rem;
     margin-right: 1vw;
 }
@@ -26,6 +26,7 @@
 .listIcon {
     display: 'flex';
     align-items: center;
+    color: var(--gold);
 }
 
 .centeredItem {
@@ -57,10 +58,10 @@
     top: 0;
     right: 0;
     cursor: pointer; 
-    color: white;
+    color: var(--gold);
 }
 
 .openIcon {
-    color: white;
+    color: var(--gold);
     cursor: pointer;
 }
